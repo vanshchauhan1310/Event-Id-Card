@@ -9,13 +9,10 @@ export default function EventCreatorAuthScreen() {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [isLogin, setIsLogin] = useState(true);
-  const [isForgotPassword, setIsForgotPassword] = useState(false);
   const navigation = useNavigation();
 
   const handleAuth = async () => {
-    if (isForgotPassword) {
-      await handleForgotPassword();
-    } else if (isLogin) {
+    if (isLogin) {
       await handleLogin();
     } else {
       await handleSignUp();
@@ -62,43 +59,7 @@ export default function EventCreatorAuthScreen() {
     }
   };
 
-  const handleForgotPassword = async () => {
-    try {
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: 'https://example.com/reset-password',
-      });
-      if (error) throw error;
-      Alert.alert('Success', 'Password reset email sent. Please check your inbox.');
-      setIsForgotPassword(false);
-    } catch (error) {
-      console.error('Error resetting password:', error);
-      Alert.alert('Reset Password Error', error.message);
-    }
-  };
-
   const renderAuthForm = () => {
-    if (isForgotPassword) {
-      return (
-        <>
-          <Text style={styles.title}>Reset Password</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Email"
-            value={email}
-            onChangeText={setEmail}
-            keyboardType="email-address"
-            autoCapitalize="none"
-          />
-          <TouchableOpacity style={styles.button} onPress={handleAuth}>
-            <Text style={styles.buttonText}>Send Reset Link</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => setIsForgotPassword(false)}>
-            <Text style={styles.switchText}>Back to Login</Text>
-          </TouchableOpacity>
-        </>
-      );
-    }
-
     return (
       <>
         <Text style={styles.title}>{isLogin ? 'Login' : 'Sign Up'} as Event Creator</Text>
@@ -129,7 +90,7 @@ export default function EventCreatorAuthScreen() {
           <Text style={styles.buttonText}>{isLogin ? 'Login' : 'Sign Up'}</Text>
         </TouchableOpacity>
         {isLogin && (
-          <TouchableOpacity onPress={() => setIsForgotPassword(true)}>
+          <TouchableOpacity onPress={() => navigation.navigate('ForgotPasswordScreen')}>
             <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
           </TouchableOpacity>
         )}

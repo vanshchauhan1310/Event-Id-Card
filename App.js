@@ -13,7 +13,8 @@ import TermsAndCondition from './components/TermsAndConditionsScreen';
 import AboutUs from './components/AboutUsScreen';
 import EventCreatorDashboard from './components/EventCreatorDashboard';
 import EventDetails from './components/EventDetails';
-import EventCreatorAuth from './components/EventCreatorAuthScreen'
+import EventCreatorAuth from './components/EventCreatorAuthScreen';
+import ForgotPassword from './components/ForgotPasswordScreen';
 
 const Stack = createStackNavigator();
 
@@ -33,6 +34,9 @@ export default function App() {
         <Stack.Screen name="AboutUs" component={AboutUs} options={{ title: 'About Us' }}/>
         <Stack.Screen name="EventDetails" component={EventDetails} options={{ title: 'Event Details' }} />
         <Stack.Screen name="EventCreatorAuth" component={EventCreatorAuth} options={{ title: 'Event Creator' }} />
+
+        <Stack.Screen name="ForgotPasswordScreen" component={ForgotPassword} options={{ title: 'Reset Password' }} />
+
 
       </Stack.Navigator>
     </NavigationContainer>
