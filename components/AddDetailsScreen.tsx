@@ -4,6 +4,7 @@ import { useRoute, useNavigation } from '@react-navigation/native';
 import { supabase } from './Supabase';
 import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
+import { Picker } from '@react-native-picker/picker';
 
 export default function GenerateIDCard() {
   const route = useRoute();
@@ -15,7 +16,10 @@ export default function GenerateIDCard() {
     customFormFields: []
   });
   const [formData, setFormData] = useState({});
+  const [pronouns] = useState(['Mr.', 'Mrs.', 'Dr.', 'Other']);
   const [loading, setLoading] = useState(false);
+  const [selectedPronoun, setSelectedPronoun] = useState('');
+  const [customPronoun, setCustomPronoun] = useState('');
 
   useEffect(() => {
     console.log('Route params:', route.params);
@@ -48,6 +52,8 @@ export default function GenerateIDCard() {
     try {
       const jsonData = JSON.stringify(formData);
       const apiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(jsonData)}`;
+
+      const finalPronoun = selectedPronoun === 'Other' ? customPronoun : selectedPronoun;
 
       const html = `
         <!DOCTYPE html>
@@ -184,7 +190,7 @@ export default function GenerateIDCard() {
                     <div class="event-name">${eventDetails.eventName}</div>
                 </div>
                 <div class="content">
-                    <div class="name">${formData.Designation || 'Attendee'} ${formData.Name || 'Attendee Name'}</div>
+                    <div class="name">${finalPronoun} ${formData.Name || 'Attendee Name'}</div>
                     <div class="qr-code">
                         <img src="${apiUrl}" alt="QR Code">
                     </div>
@@ -206,7 +212,7 @@ export default function GenerateIDCard() {
         .from('id_cards')
         .insert({
           event_name: eventDetails.eventName,
-          form_data: formData,
+          form_data: { ...formData, pronoun: finalPronoun },
           qr_code_url: apiUrl,
         });
 
@@ -240,6 +246,40 @@ export default function GenerateIDCard() {
         <View style={styles.inputWrapper}>
           <Text style={styles.label}>Event Name:</Text>
           <Text style={styles.eventNameText}>{eventDetails.eventName || 'No event name provided'}</Text>
+
+          <View>
+            <Text style={styles.label}>Salutation :</Text>
+            <View style={styles.pickerContainer}>
+              <Picker
+                selectedValue={selectedPronoun}
+                style={styles.picker}
+                onValueChange={(itemValue) => {
+                  setSelectedPronoun(itemValue);
+                  if (itemValue !== 'Other') {
+                    setFormData({...formData, pronoun: itemValue});
+                    setCustomPronoun('');
+                  }
+                }}
+              >
+                <Picker.Item label="Select Salutation" value="" />
+                {pronouns.map((pronoun, index) => (
+                  <Picker.Item key={index} label={pronoun} value={pronoun} />
+                ))}
+              </Picker>
+            </View>
+            {selectedPronoun === 'Other' && (
+              <TextInput
+                style={styles.input}
+                value={customPronoun}
+                onChangeText={(text) => {
+                  setCustomPronoun(text);
+                  setFormData({...formData, pronoun: text});
+                }}
+                placeholder="Enter custom pronoun"
+                placeholderTextColor="#999"
+              />
+            )}
+          </View>
 
           {eventDetails.customFormFields.map((field, index) => (
             <View key={index}>
@@ -335,4 +375,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#f0f0f0',
     borderRadius: 8,
   },
+  pickerContainer: {
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 8,
+    marginBottom: 20,
+    backgroundColor: '#f9f9f9',
+  },
+  picker: {
+    height: 45,
+    width: '100%',
+  },
 });
+
