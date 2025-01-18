@@ -1,17 +1,43 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image, Dimensions, Animated, Alert } from 'react-native';
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+  Image,
+  Dimensions,
+  Animated,
+  Alert,
+TextInput,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Feather } from '@expo/vector-icons';
 import { Video } from 'expo-av'; // Import Video component
-
+import { supabase } from './Supabase';
 
 const { width } = Dimensions.get('window');
 
 export default function HomeScreen() {
   const navigation = useNavigation();
   const fadeAnim = React.useRef(new Animated.Value(0)).current;
+
+    const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleEventCreatorLogin = async () => {
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) throw error;
+      navigation.navigate('EventCreatorDashboard');
+    } catch (error) {
+      console.error('Error logging in:', error);
+      Alert.alert('Login Error', error.message);
+    }
+  };
+
 
   React.useEffect(() => {
     Animated.timing(fadeAnim, {
@@ -23,25 +49,29 @@ export default function HomeScreen() {
 
   const renderFeatureItem = (icon, text) => (
     <View style={styles.featureItem}>
-      <Feather name={icon} size={24} color="#007AFF" style={styles.featureIcon} />
+      <Feather
+        name={icon}
+        size={24}
+        color="#007AFF"
+        style={styles.featureIcon}
+      />
       <Text style={styles.featureText}>{text}</Text>
     </View>
   );
 
   const showComingSoonAlert = () => {
     Alert.alert(
-      "Coming Soon",
-      "This feature will be available in a future update!",
-      [{ text: "OK", onPress: () => console.log("OK Pressed") }]
+      'Coming Soon',
+      'This feature will be available in a future update!',
+      [{ text: 'OK', onPress: () => console.log('OK Pressed') }]
     );
   };
 
-   return (
+  return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
         colors={['#4c669f', '#3b5998', '#192f6a']}
-        style={styles.gradient}
-      >
+        style={styles.gradient}>
         <ScrollView contentContainerStyle={styles.scrollContent}>
           <Animated.View style={[styles.content, { opacity: fadeAnim }]}>
             <View style={styles.header}>
@@ -56,54 +86,70 @@ export default function HomeScreen() {
             </View>
 
             <Text style={styles.description}>
-              Your all-in-one solution for event management and ID card generation.
+              Your all-in-one solution for event management and ID card
+              generation.
             </Text>
 
             <View style={styles.featuresContainer}>
               <Text style={styles.sectionTitle}>Key Features</Text>
               {renderFeatureItem('calendar', 'Create and manage events')}
               {renderFeatureItem('credit-card', 'Generate custom ID cards')}
-              {renderFeatureItem('smartphone', 'Scan QR codes for quick check-ins')}
+              {renderFeatureItem(
+                'smartphone',
+                'Scan QR codes for quick check-ins'
+              )}
             </View>
 
             <View style={styles.buttonContainer}>
               <TouchableOpacity
                 style={[styles.button, styles.quaternaryButton]}
-                onPress={() => navigation.navigate('AboutUs')}
-              >
-                <Feather name="info" size={24} color="#fff" style={styles.buttonIcon} />
+                onPress={() => navigation.navigate('AboutUs')}>
+                <Feather
+                  name="info"
+                  size={24}
+                  color="#fff"
+                  style={styles.buttonIcon}
+                />
                 <Text style={styles.buttonText}>About Us</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.button}
-                onPress={() => navigation.navigate('EventList')}
-              >
-                <Feather name="list" size={24} color="#fff" style={styles.buttonIcon} />
+                onPress={() => navigation.navigate('EventList')}>
+                <Feather
+                  name="list"
+                  size={24}
+                  color="#fff"
+                  style={styles.buttonIcon}
+                />
                 <Text style={styles.buttonText}>View Events</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
-                style={[styles.button, styles.tertiaryButton]}
-                onPress={showComingSoonAlert}
-              >
-                <Feather name="log-in" size={24} color="#fff" style={styles.buttonIcon} />
-                <Text style={styles.buttonText}>Log in as Event Creator</Text>
-              </TouchableOpacity>
+        style={[styles.button, styles.tertiaryButton]}
+        onPress={() => navigation.navigate('EventCreatorAuth')}>
+        <Feather
+          name="log-in"
+          size={24}
+          color="#fff"
+          style={styles.buttonIcon}
+        />
+        <Text style={styles.buttonText}>Log in as Event Creator</Text>
+      </TouchableOpacity>
 
               {/* New View for Privacy Policy and Terms and Conditions */}
               <View style={styles.privacyContainer}>
                 <TouchableOpacity
                   style={styles.privacyButton}
-                  onPress={() => navigation.navigate('PrivacyPolicy')}
-                >
+                  onPress={() => navigation.navigate('PrivacyPolicy')}>
                   <Text style={styles.privacyButtonText}>Privacy Policy</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                   style={styles.privacyButton}
-                  onPress={() => navigation.navigate('TermsAndConditions')}
-                >
-                  <Text style={styles.privacyButtonText}>Terms And Conditions</Text>
+                  onPress={() => navigation.navigate('TermsAndConditions')}>
+                  <Text style={styles.privacyButtonText}>
+                    Terms And Conditions
+                  </Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -162,12 +208,12 @@ const styles = StyleSheet.create({
     padding: 20,
     marginBottom: 30,
     width: width - 40,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 4,
     },
-    shadowOpacity: 0.30,
+    shadowOpacity: 0.3,
     shadowRadius: 4.65,
     elevation: 8,
   },
@@ -202,7 +248,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 15,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -228,7 +274,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-   privacyContainer: {
+  privacyContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
@@ -244,5 +290,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textDecorationLine: 'underline',
   },
+  
+  loginContainer: {
+    width: '100%',
+    marginBottom: 20,
+  },
+  input: {
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    borderRadius: 10,
+    padding: 15,
+    marginBottom: 10,
+  },
 });
-

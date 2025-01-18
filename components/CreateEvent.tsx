@@ -86,6 +86,10 @@ const handleSaveEvent = async () => {
   }
 
   try {
+
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error('No user logged in');
+
     const eventLogoUrl = eventLogo ? await uploadImage(eventLogo) : null;
     const orgLogoUrl = organisationLogo ? await uploadImage(organisationLogo) : null;
 
@@ -99,6 +103,7 @@ const handleSaveEvent = async () => {
       event_web: eventWeb,
       event_logo: eventLogoUrl,
       organisation_logo: orgLogoUrl,
+      creator_id: user.id,
       custom_form_fields: JSON.stringify(customFormFields),
     };
 

@@ -40,6 +40,9 @@ export default function GenerateIDCard() {
       return;
     }
 
+     const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error('No user logged in');
+      
     const requiredFields = eventDetails.customFormFields.filter(field => field.isRequired);
     const missingFields = requiredFields.filter(field => !formData[field.label]);
 
@@ -212,6 +215,7 @@ export default function GenerateIDCard() {
         .from('id_cards')
         .insert({
           event_name: eventDetails.eventName,
+          creator_id: user.id,
           form_data: { ...formData, pronoun: finalPronoun },
           qr_code_url: apiUrl,
         });

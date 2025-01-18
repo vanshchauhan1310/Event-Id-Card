@@ -189,12 +189,7 @@ export default function EventListScreen() {
           </Text>
         }
       />
-      <TouchableOpacity
-        style={styles.createButton}
-        onPress={() => navigation.navigate('CreateEvent')}
-      >
-        <Text style={styles.buttonText}>Create New Event</Text>
-      </TouchableOpacity>
+
     </View>
   );
 }
@@ -286,4 +281,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
   },
+
+  
 });
