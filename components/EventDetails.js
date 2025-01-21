@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
-import { supabase } from './Supabase';
 import { useRoute, useNavigation } from '@react-navigation/native';
+import { supabase } from '../lib/supabase';
 
 export default function EventDetails() {
   const [event, setEvent] = useState(null);

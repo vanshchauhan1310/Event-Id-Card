@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { Card } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
-import { supabase } from './Supabase';
 import { useNavigation } from '@react-navigation/native';
+import { supabase } from '../lib/supabase';
 
 export default function EventCreatorDashboard() {
   const [eventStats, setEventStats] = useState({

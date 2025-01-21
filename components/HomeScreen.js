@@ -15,23 +15,23 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Feather } from '@expo/vector-icons';
-import { Video } from 'expo-av'; // Import Video component
-import { supabase } from './Supabase';
+import { Video ,ResizeMode } from 'expo-av'; // Import Video component
+import { supabase } from '../lib/supabase';
 
 const { width } = Dimensions.get('window');
 
 export default function HomeScreen() {
-  const navigation = useNavigation();
   const fadeAnim = React.useRef(new Animated.Value(0)).current;
-
-    const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigation = useNavigation();
 
   const handleEventCreatorLogin = async () => {
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) throw error;
-      navigation.navigate('EventCreatorDashboard');
+      navigation.navigate("EventCreatorDashboard" );
     } catch (error) {
       console.error('Error logging in:', error);
       Alert.alert('Login Error', error.message);
@@ -78,7 +78,7 @@ export default function HomeScreen() {
               <Video
                 source={require('../assets/Logo2.mp4')} // Use Video component
                 style={styles.logo}
-                resizeMode="contain"
+                resizeMode={ResizeMode.CONTAIN}
                 isLooping
                 shouldPlay
               />
