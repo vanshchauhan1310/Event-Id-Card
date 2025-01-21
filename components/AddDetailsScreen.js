@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, SafeAreaView, ScrollView } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
-import { supabase } from './Supabase';
 import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
 import { Picker } from '@react-native-picker/picker';
+import { supabase } from '../lib/supabase';
 
 export default function GenerateIDCard() {
   const route = useRoute();

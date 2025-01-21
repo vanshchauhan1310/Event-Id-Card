@@ -4,10 +4,12 @@ import { Card, Button, Text, CheckBox } from 'react-native-elements';
 import * as ImagePicker from 'expo-image-picker';
 import * as FileSystem from 'expo-file-system';
 import { decode } from 'base64-arraybuffer';
-import { supabase } from './Supabase';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { supabase } from '../lib/supabase';
+import { useNavigation } from '@react-navigation/native';
 
-export default function CreateEventScreen({ navigation }) {
+export default function CreateEventScreen() {
+  const navigation = useNavigation();
   const [eventName, setEventName] = useState('');
   const [eventStartDate, setEventStartDate] = useState(new Date());
   const [eventEndDate, setEventEndDate] = useState(new Date());

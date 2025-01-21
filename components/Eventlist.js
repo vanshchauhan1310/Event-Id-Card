@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { View, StyleSheet, FlatList, TouchableOpacity, Image, Linking, Alert, RefreshControl } from 'react-native';
 import { Card, Text } from 'react-native-elements';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
-import { supabase } from './Supabase';
+import { supabase } from '../lib/supabase';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import debounce from 'lodash/debounce';
 
