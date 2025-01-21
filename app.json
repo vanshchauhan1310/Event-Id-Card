@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "prasang",
+    "name": "Prasang",
     "slug": "snack-c6bbffd5-ee5d-45a9-a1c5-7abb1ae5b373",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon2.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -13,13 +13,11 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.rustedshader.snackc6bbffd5ee5d45a9a1c57abb1ae5b373"
+      "bundleIdentifier": "com.rustedshader.snackc6bbffd5ee5d45a9a1c57abb1ae5b373",
+      "icon": "./assets/icon.png"
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
+      "icon": "./assets/icon.png",
       "package": "com.rustedshader.snackc6bbffd5ee5d45a9a1c57abb1ae5b373"
     },
     "web": {

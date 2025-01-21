@@ -103,7 +103,6 @@ export default function TermsAndConditionsScreen() {
           If you have questions about these Terms or the Service, please contact us at:
         </Text>
         <Text style={styles.bulletPoint}>• Email: Keshav.sinha@yandex.com</Text>
-        <Text style={styles.bulletPoint}>• Address: [Your Company Address]</Text>
 
         <Text style={styles.sectionTitle}>14. Miscellaneous</Text>
         <Text style={styles.bulletPoint}>• These Terms constitute the entire agreement between you and [Your Company Name] regarding the use of the Service.</Text>
