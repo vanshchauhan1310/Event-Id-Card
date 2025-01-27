@@ -178,7 +178,6 @@ export default function PrivacyPolicyScreen() {
         </Text>
         <Text style={styles.bulletPoint}>• Email: Keshav.sinha@yandex.com</Text>
         <Text style={styles.bulletPoint}>• Phone: +91 7004027470</Text>
-        <Text style={styles.bulletPoint}>• Address: [Company Address]</Text>
 
         <Text style={styles.paragraph}>
           This detailed policy ensures compliance with global standards and provides transparency to
