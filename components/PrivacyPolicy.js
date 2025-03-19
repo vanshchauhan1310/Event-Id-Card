@@ -127,7 +127,7 @@ export default function PrivacyPolicyScreen() {
         <Text style={styles.bulletPoint}>4. Portability: Obtain a copy of your data in a structured, machine-readable format.</Text>
         <Text style={styles.bulletPoint}>5. Opt-Out: Withdraw consent for specific data processing activities, such as marketing communications.</Text>
         <Text style={styles.paragraph}>
-          To exercise these rights, please contact us at [Support Email].
+          To exercise these rights, please contact us at keshav.sinha@yandex.com.
         </Text>
 
         <Text style={styles.sectionTitle}>6. Data Retention</Text>
@@ -151,7 +151,7 @@ export default function PrivacyPolicyScreen() {
 
         <Text style={styles.sectionTitle}>8. International Data Transfers</Text>
         <Text style={styles.paragraph}>
-          If you access our App from outside [Insert Country/Region], your information may be
+          If you access our App from outside India, your information may be
           transferred to and processed in a country with different data protection laws. We ensure
           appropriate safeguards are in place, such as standard contractual clauses or compliance with
           legal frameworks like GDPR.

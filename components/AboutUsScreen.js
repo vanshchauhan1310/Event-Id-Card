@@ -7,9 +7,10 @@ export default function AboutUsScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
-        colors={['#4c669f', '#3b5998', '#192f6a']}
+        colors={['#ff3131', '#ff914d']}
         style={styles.gradient}
-      >
+        start={{ x: 0, y: 0 }}
+        end={{ x: Math.cos(135 * (Math.PI / 180)), y: Math.sin(135 * (Math.PI / 180)) }}>
         <ScrollView contentContainerStyle={styles.scrollContent}>
           <Text style={styles.title}>About Us</Text>
           
@@ -112,6 +113,7 @@ const styles = StyleSheet.create({
     color: '#e0e0e0',
     marginBottom: 15,
     lineHeight: 24,
+    fontWeight: 'bold',
   },
   bulletPoint: {
     fontSize: 16,
