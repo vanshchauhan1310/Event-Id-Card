@@ -21,7 +21,7 @@ export default function TermsAndConditionsScreen() {
         <Text style={styles.paragraph}>
           By downloading, installing, or using Prasang, you agree to comply with and be bound by
           these Terms of Service. These terms form a legally binding agreement between you ("User")
-          and [Your Company Name] ("we," "us," or "our").
+          and  ("we," "us," or "our").
         </Text>
         <Text style={styles.paragraph}>
           If you are using the Service on behalf of an organization, you confirm that you are authorized
@@ -63,7 +63,7 @@ export default function TermsAndConditionsScreen() {
         <Text style={styles.bulletPoint}>• We are not liable for disputes between event organizers and participants regarding ticket sales or refunds.</Text>
 
         <Text style={styles.sectionTitle}>7. Intellectual Property Rights</Text>
-        <Text style={styles.bulletPoint}>• All content, design elements, and features of the Service, including but not limited to logos, text, graphics, and code, are the intellectual property of [Your Company Name].</Text>
+        <Text style={styles.bulletPoint}>• All content, design elements, and features of the Service, including but not limited to logos, text, graphics, and code, are the intellectual property of.</Text>
         <Text style={styles.bulletPoint}>• You are prohibited from copying, reproducing, or creating derivative works of any material provided through the Service.</Text>
 
         <Text style={styles.sectionTitle}>8. Privacy Policy</Text>
@@ -86,26 +86,26 @@ export default function TermsAndConditionsScreen() {
           You may terminate your use of the Service at any time by deleting your account. Upon
           termination, all licenses granted to you will cease immediately.
         </Text>
-
+{/* 
         <Text style={styles.sectionTitle}>11. Dispute Resolution</Text>
-        <Text style={styles.bulletPoint}>• Governing Law: These Terms shall be governed by and construed in accordance with the laws of [Insert Jurisdiction].</Text>
-        <Text style={styles.bulletPoint}>• Arbitration: Any disputes arising under these Terms will be resolved through binding arbitration in [Insert Jurisdiction].</Text>
+        <Text style={styles.bulletPoint}>• Governing Law: These Terms shall be governed by and construed in accordance with the laws of .</Text>
+        <Text style={styles.bulletPoint}>• Arbitration: Any disputes arising under these Terms will be resolved through binding arbitration in .</Text> */}
 
-        <Text style={styles.sectionTitle}>12. Modifications to Terms</Text>
+        <Text style={styles.sectionTitle}>11. Modifications to Terms</Text>
         <Text style={styles.paragraph}>
           We may update these Terms from time to time. Changes will be posted within the app, and
           significant updates will be communicated to users. Your continued use of the Service after
           such updates constitutes acceptance of the revised Terms.
         </Text>
 
-        <Text style={styles.sectionTitle}>13. Contact Us</Text>
+        <Text style={styles.sectionTitle}>12. Contact Us</Text>
         <Text style={styles.paragraph}>
           If you have questions about these Terms or the Service, please contact us at:
         </Text>
         <Text style={styles.bulletPoint}>• Email: Keshav.sinha@yandex.com</Text>
 
-        <Text style={styles.sectionTitle}>14. Miscellaneous</Text>
-        <Text style={styles.bulletPoint}>• These Terms constitute the entire agreement between you and [Your Company Name] regarding the use of the Service.</Text>
+        <Text style={styles.sectionTitle}>13. Miscellaneous</Text>
+        <Text style={styles.bulletPoint}>• These Terms constitute the entire agreement between you and regarding the use of the Service.</Text>
         <Text style={styles.bulletPoint}>• If any provision of these Terms is found to be invalid or unenforceable, the remaining provisions will remain in effect.</Text>
 
         <Text style={styles.paragraph}>

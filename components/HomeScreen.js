@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import {
   View,
   Text,
@@ -17,6 +17,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Feather } from '@expo/vector-icons';
 import { Video ,ResizeMode } from 'expo-av'; // Import Video component
 import { supabase } from '../lib/supabase';
+import * as Font from 'expo-font';
 
 const { width } = Dimensions.get('window');
 
@@ -24,6 +25,7 @@ export default function HomeScreen() {
   const fadeAnim = React.useRef(new Animated.Value(0)).current;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [fontsLoaded, setFontsLoaded] = useState(false);
 
   const navigation = useNavigation();
 
@@ -67,11 +69,27 @@ export default function HomeScreen() {
     );
   };
 
+  useEffect(() => {
+    async function loadFonts() {
+      await Font.loadAsync({
+        'Magnolia': require('../assets/fonts/magnolia_script.otf'),
+      });
+      setFontsLoaded(true);
+    }
+    loadFonts();
+  }, []);
+
+  if (!fontsLoaded) {
+    return <View />;
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
-        colors={['#4c669f', '#3b5998', '#192f6a']}
-        style={styles.gradient}>
+        colors={['#ff3131', '#ff914d']}
+        style={styles.gradient}
+        start={{ x: 0, y: 0 }}
+        end={{ x: Math.cos(135 * (Math.PI / 180)), y: Math.sin(135 * (Math.PI / 180)) }}>
         <ScrollView contentContainerStyle={styles.scrollContent}>
           <Animated.View style={[styles.content, { opacity: fadeAnim }]}>
             <View style={styles.header}>
@@ -86,8 +104,7 @@ export default function HomeScreen() {
             </View>
 
             <Text style={styles.description}>
-              Your all-in-one solution for event management and ID card
-              generation.
+              All in one solution for event management 
             </Text>
 
             <View style={styles.featuresContainer}>
@@ -188,12 +205,12 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
-    fontWeight: 'bold',
     color: '#fff',
     textAlign: 'center',
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
     textShadowOffset: { width: -1, height: 1 },
     textShadowRadius: 10,
+    fontFamily: 'Magnolia',
   },
   description: {
     fontSize: 18,
@@ -233,7 +250,7 @@ const styles = StyleSheet.create({
     marginRight: 15,
   },
   featureText: {
-    fontSize: 18,
+    fontSize: 17,
     color: '#333',
   },
   buttonContainer: {
